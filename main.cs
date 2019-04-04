@@ -12,7 +12,14 @@ namespace studentuprograma
             Console.Write("Iveskite studento pavarde: "); string pav = Console.ReadLine();
             Console.Write("Iveskite studento egzamino pazymi: "); int egz = int.Parse(Console.ReadLine());
             Studentas stud = new Studentas(vard, pav, egz);
-            stud.AddPazymiai();
+            Console.WriteLine("iveskite 1, kad sugeneruoti atsitiktinius pazymius, spauskite \"Enter\" kad ivesti pazymius ranka"); 
+            int sel = int.Parse(Console.ReadLine());
+            if (sel == 1)
+            {
+                Console.WriteLine("Kiek pazymiu sugeneruoti?"); int kiek = int.Parse(Console.ReadLine());
+                stud.GeneratePazymiai(kiek);
+            }
+            else stud.AddPazymiai();
             Studentai.Add(stud);
         }
 
