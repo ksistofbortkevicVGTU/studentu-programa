@@ -16,11 +16,8 @@ namespace studentuprograma
         public Studentas(string vard, string pav){
             this.Vardas = vard; this.Pavarde = pav;}
 
-        public Studentas(string vard, string pav, double vid){
-            this.Vardas = vard; this.Pavarde = pav; this.Vidurkis = vid;}
-
-        public Studentas(string vard, string pav, double vid, int egz){
-            this.Vardas = vard; this.Pavarde = pav; this.Vidurkis = vid; this.EgzPazymys = egz;}
+        public Studentas(string vard, string pav, int egz){
+            this.Vardas = vard; this.Pavarde = pav; this.EgzPazymys = egz;}
 
         //Setters and getters:
 
@@ -40,9 +37,8 @@ namespace studentuprograma
         {
             do
             {
-                Console.WriteLine("Irasykite pazymius, kai baigsite, iveskite \"x\"");
+                Console.WriteLine("Irasykite po viena namu darbu pazymi, kai baigsite, iveskite \"x\"");
                 string ConsoleInput = Console.ReadLine();
-
                 if (ConsoleInput == "x") break;
                 else NdPazymiai.Add(Convert.ToInt32(ConsoleInput));
             } while (true);
