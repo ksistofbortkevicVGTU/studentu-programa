@@ -35,14 +35,29 @@ namespace studentuprograma
 
         public void AddPazymiai()
         {
+            Console.WriteLine("Irasykite po viena namu darbu pazymi, kai baigsite, iveskite \"x\"");
             do
             {
-                Console.WriteLine("Irasykite po viena namu darbu pazymi, kai baigsite, iveskite \"x\"");
                 string ConsoleInput = Console.ReadLine();
                 if (ConsoleInput == "x") break;
                 else NdPazymiai.Add(Convert.ToInt32(ConsoleInput));
             } while (true);
-            Vidurkis = CountVidurkis();
+
+        }
+
+        public void GautiVidurki(int type)
+        {
+            if (type == 1) Vidurkis = CountVidurkis();
+            if (type == 2)
+            {
+                int[] TempArr = NdPazymiai.ToArray();
+                Array.Sort(TempArr);
+                if (TempArr.Length % 2 == 0)
+                {
+                    Vidurkis = ((TempArr[(TempArr.Length / 2) - 1] + TempArr[(TempArr.Length / 2)]) / 2);
+                }
+                else Vidurkis = TempArr[(TempArr.Length / 2 - 1)];
+            }
         }
 
         public double BendrasPazymys(){ return (0.7f * EgzPazymys) + (0.3f * Vidurkis); }

@@ -18,10 +18,12 @@ namespace studentuprograma
 
         private static void PrintStudents(List<Studentas> Studentai)
         {
-            Console.WriteLine("{0,-15}{1,-15}{2,16}\n----------------------------------------------", "Vardas", "Pavarde", "Galutinis(vid.)");
+            Console.WriteLine("Vesti bendra pazymi is 1 - vidurkio ar 2 - medianos?"); int sel = int.Parse(Console.ReadLine());
+            Console.WriteLine("{0,-15}{1,-15}{2,16}\n----------------------------------------------", "Vardas", "Pavarde", "Galutinis");
             foreach (Studentas stud in Studentai)
             {
-                Console.WriteLine("{0,-15}{1,-15}{2,16}", stud.GetVardas(), stud.GetPavarde(), stud.BendrasPazymys());
+                stud.GautiVidurki(sel);
+                Console.WriteLine("{0,-15}{1,-15}{2,16}", stud.GetVardas(), stud.GetPavarde(), Math.Round(stud.BendrasPazymys(), 2));
             }
         }
 
