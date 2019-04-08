@@ -19,6 +19,9 @@ namespace studentuprograma
         public Studentas(string vard, string pav, int egz){
             this.Vardas = vard; this.Pavarde = pav; this.EgzPazymys = egz;}
 
+        public Studentas(string vard, string pav, int egz, List<int> grades){
+            this.Vardas = vard; this.Pavarde = pav; this.EgzPazymys = egz; this.NdPazymiai = grades;}
+
         //Setters and getters:
 
         public void SetVardas(string vard) { this.Vardas = vard; }
