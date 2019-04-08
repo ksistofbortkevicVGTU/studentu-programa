@@ -66,7 +66,7 @@ namespace studentuprograma
             foreach (Studentas stud in Studentai)
             {
                 stud.GautiVidurki(sel);
-                Console.WriteLine("{0,-15}{1,-15}{2,16}", stud.GetVardas(), stud.GetPavarde(), Math.Round(stud.BendrasPazymys(), 2));
+                Console.WriteLine("{0,-15}{1,-15}{2,16}", stud.Vardas, stud.Pavarde, Math.Round(stud.BendrasPazymys(), 2));
             }
         }
 
@@ -79,7 +79,7 @@ namespace studentuprograma
                 if (ConsoleInput == "x") break;
                 if (ConsoleInput == "1") AddStudent(Studentai);
                 if (ConsoleInput == "2") PrintStudents(Studentai);
-                if (ConsoleInput == "3") Studentai = ReadFile();
+                if (ConsoleInput == "3") Studentai = ReadFile().OrderBy(x => x.Vardas).ThenBy(x => x.Pavarde).ToList();
             } while (true);
         }
 

@@ -6,11 +6,11 @@ namespace studentuprograma
     public class Studentas
     {
         //Declare variables
-        private string Vardas;
-        private string Pavarde;
-        private double Vidurkis;
-        private int EgzPazymys;
-        private List<int> NdPazymiai = new List<int>();
+        public string Vardas;
+        public string Pavarde;
+        public double Vidurkis;
+        public int EgzPazymys;
+        public List<int> NdPazymiai = new List<int>();
 
         //Declare constructors
         public Studentas(string vard, string pav){
@@ -22,17 +22,6 @@ namespace studentuprograma
         public Studentas(string vard, string pav, int egz, List<int> grades){
             this.Vardas = vard; this.Pavarde = pav; this.EgzPazymys = egz; this.NdPazymiai = grades;}
 
-        //Setters and getters:
-
-        public void SetVardas(string vard) { this.Vardas = vard; }
-        public void SetPavarde(string pav) { this.Pavarde = pav; }
-        public void SetVidurkis(double vid) { this.Vidurkis = vid; }
-        public void SetEgzPazymys(int paz) { this.EgzPazymys = paz; }
-
-        public string GetVardas() { return this.Vardas; }
-        public string GetPavarde() { return this.Pavarde; }
-        public double GetVidurkis() { return this.Vidurkis; }
-        public int GetEgzPazymys() { return this.EgzPazymys; }
 
         //Public methods:
 
