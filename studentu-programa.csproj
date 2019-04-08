@@ -36,6 +36,7 @@
     <Compile Include="Studentas.cs" />
     <Compile Include="MenuClass.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="FileReader.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
