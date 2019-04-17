@@ -12,6 +12,8 @@ namespace studentuprograma
         public int EgzPazymys;
         public List<int> NdPazymiai = new List<int>();
 
+        private string ConsoleInput;
+
         //Declare constructors
         public Studentas(string vard, string pav){
             this.Vardas = vard; this.Pavarde = pav;}
@@ -30,11 +32,15 @@ namespace studentuprograma
             Console.WriteLine("Irasykite po viena namu darbu pazymi, kai baigsite, iveskite \"x\"");
             do
             {
-                string ConsoleInput = Console.ReadLine();
-                if (ConsoleInput == "x") break;
-                else NdPazymiai.Add(Convert.ToInt32(ConsoleInput));
+                try
+                {
+                    ConsoleInput = Console.ReadLine();
+                    if (ConsoleInput == "x") break;
+                    if (int.Parse(ConsoleInput) < 1 || int.Parse(ConsoleInput) > 10) throw new Exception("GradeOutOfBoundsException");
+                    else NdPazymiai.Add(Convert.ToInt32(ConsoleInput));
+                } catch (FormatException ex){ Console.WriteLine("Ivestas neteisingas simbolis");} 
+                catch (Exception ex){ Console.WriteLine("Ivestas blogas pazymys"); }
             } while (true);
-
         }
 
         public void GeneratePazymiai(int n)

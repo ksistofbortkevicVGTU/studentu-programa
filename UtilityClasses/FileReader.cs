@@ -45,7 +45,8 @@ namespace studentuprograma
             } catch (System.IO.FileNotFoundException ex)
             {
                 Console.WriteLine("Failas nerastas. Sukurkite arba teisingai pavadinkite faila i \"kursiokai.txt\"\n Paspauskite bet kuri mygtuka, kad uzdaryti programa");
-                Console.ReadKey(); 
+                Console.ReadKey();
+                Environment.Exit(0);
             }
             return studentai;
         }

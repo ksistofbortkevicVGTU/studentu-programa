@@ -14,12 +14,17 @@ namespace studentuprograma
             Console.Write("Iveskite studento varda: "); string vard = Console.ReadLine();
             Console.Write("Iveskite studento pavarde: "); string pav = Console.ReadLine();
             Console.Write("Iveskite studento egzamino pazymi: ");
-            try { egz = int.Parse(Console.ReadLine());} 
-            catch (Exception ex)
+            try 
+            { 
+                egz = int.Parse(Console.ReadLine());
+                if (egz < 1 || egz > 10) throw new Exception("GradeOutOfBoundsException");
+            } 
+            catch (FormatException ex)
             {
                 Console.WriteLine("Ivedimo klaida, iveskite sveika skaiciu");
                 AddStudent(Studentai);
-            }
+            } catch (Exception ex) { Console.WriteLine("Ivestas blogas egzamino pazymys"); AddStudent(Studentai); }
+
             Studentas stud = new Studentas(vard, pav, egz);
             Console.WriteLine("iveskite 1, kad sugeneruoti atsitiktinius pazymius, iveskite kita skaiciu, kad ivesti pazymius ranka");
             try { sel = int.Parse(Console.ReadLine()); } 
