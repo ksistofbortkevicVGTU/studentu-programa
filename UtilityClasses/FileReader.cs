@@ -36,11 +36,17 @@ namespace studentuprograma
         public static List<Studentas> ReadFile()
         {
             List<Studentas> studentai = new List<Studentas>();
-            string[] lines = File.ReadAllLines("../../kursiokai.txt");
-            lines = lines.Skip(1).ToArray();
+            try
+            {
+                string[] lines = File.ReadAllLines("../../kursiokai.txt");
+                lines = lines.Skip(1).ToArray();
 
-            studentai.AddRange(ToObjectFromLines(lines));
-
+                studentai.AddRange(ToObjectFromLines(lines));
+            } catch (System.IO.FileNotFoundException ex)
+            {
+                Console.WriteLine("Failas nerastas. Sukurkite arba teisingai pavadinkite faila i \"kursiokai.txt\"\n Paspauskite bet kuri mygtuka, kad uzdaryti programa");
+                Console.ReadKey(); 
+            }
             return studentai;
         }
     }

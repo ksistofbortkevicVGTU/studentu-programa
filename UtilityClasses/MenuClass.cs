@@ -77,7 +77,7 @@ namespace studentuprograma
                 if (ConsoleInput == "x") break;
                 if (ConsoleInput == "1") AddStudent(Studentai);
                 if (ConsoleInput == "2") PrintStudents(Studentai);
-                if (ConsoleInput == "3") Studentai = FileReader.ReadFile().OrderBy(x => x.Vardas).ThenBy(x => x.Pavarde).ToList();
+                if (ConsoleInput == "3") Studentai.AddRange(FileReader.ReadFile().OrderBy(x => x.Vardas).ThenBy(x => x.Pavarde).ToList());
             } while (true);
         }
     }
