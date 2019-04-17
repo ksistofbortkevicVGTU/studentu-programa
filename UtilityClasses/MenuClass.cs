@@ -4,19 +4,39 @@ using System.Linq;
 
 namespace studentuprograma
 {
-    public static class Menu
+    public class Menu
     {
+        private static int egz, sel, kiek;
+
+
         private static void AddStudent(List<Studentas> Studentai)
         {
             Console.Write("Iveskite studento varda: "); string vard = Console.ReadLine();
             Console.Write("Iveskite studento pavarde: "); string pav = Console.ReadLine();
-            Console.Write("Iveskite studento egzamino pazymi: "); int egz = int.Parse(Console.ReadLine());
+            Console.Write("Iveskite studento egzamino pazymi: ");
+            try { egz = int.Parse(Console.ReadLine());} 
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ivedimo klaida, iveskite sveika skaiciu");
+                AddStudent(Studentai);
+            }
             Studentas stud = new Studentas(vard, pav, egz);
-            Console.WriteLine("iveskite 1, kad sugeneruoti atsitiktinius pazymius, spauskite \"Enter\" kad ivesti pazymius ranka");
-            int sel = int.Parse(Console.ReadLine());
+            Console.WriteLine("iveskite 1, kad sugeneruoti atsitiktinius pazymius, iveskite kita skaiciu, kad ivesti pazymius ranka");
+            try { sel = int.Parse(Console.ReadLine()); } 
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ivedimo klaida, iveskite skaiciu.");
+                AddStudent(Studentai);
+            }
             if (sel == 1)
             {
-                Console.WriteLine("Kiek pazymiu sugeneruoti?"); int kiek = int.Parse(Console.ReadLine());
+                Console.WriteLine("Kiek pazymiu sugeneruoti?"); 
+                try { kiek = int.Parse(Console.ReadLine()); }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Ivedimo klaida, iveskite skaiciu.");
+                    AddStudent(Studentai);
+                }
                 stud.GeneratePazymiai(kiek);
             }
             else stud.AddPazymiai();
@@ -25,7 +45,21 @@ namespace studentuprograma
 
         private static void PrintStudents(List<Studentas> Studentai)
         {
-            Console.WriteLine("Vesti bendra pazymi is 1 - vidurkio ar 2 - medianos?"); int sel = int.Parse(Console.ReadLine());
+            Console.WriteLine("Vesti bendra pazymi is 1 - vidurkio ar 2 - medianos?"); 
+            try 
+            { 
+                sel = int.Parse(Console.ReadLine());
+                if (sel != 1 && sel != 2) throw new Exception("WrongNumberException");
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine("Ivedimo klaida, iveskite skaiciu.");
+                PrintStudents(Studentai);
+            } catch (Exception ex)
+            {
+                Console.WriteLine("Ivestas neteisingas variantas");
+                PrintStudents(Studentai);
+            }
             Console.WriteLine("{0,-15}{1,-15}{2,16}\n----------------------------------------------", "Vardas", "Pavarde", "Galutinis");
             foreach (Studentas stud in Studentai)
             {
