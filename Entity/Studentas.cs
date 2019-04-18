@@ -46,7 +46,7 @@ namespace studentuprograma
         public void GeneratePazymiai(int n)
         {
             Random rnd = new Random();
-            for(int i = 0; i <= n; i++) NdPazymiai.Add(rnd.Next(2, 11));
+            for(int i = 0; i < n; i++) NdPazymiai.Add(rnd.Next(2, 11));
         }
 
         public void GautiVidurki(int type)

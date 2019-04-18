@@ -9,6 +9,32 @@ namespace studentuprograma
         private static int egz, sel, kiek;
 
 
+        private static void GenerateStudents()
+        {
+            List<int> grades = new List<int>();
+            Console.WriteLine("Kiek studentų sugeneruoti?");
+            try
+            {
+                Random rnd = new Random();
+                string TempName, TempSurn;
+                int stud = int.Parse(Console.ReadLine());
+                System.IO.StreamWriter outfile = new System.IO.StreamWriter("../../kursiokai" + stud + ".txt", true);
+                outfile.WriteLine("{0,-15}{1,-15}{2,16}\n----------------------------------------------", "Vardas", "Pavarde", "Galutinis");
+                for (int i = 1; i <= stud; i++)
+                {
+                    TempName = "Vardas" + i; TempSurn = "Pavarde" + i;
+                    Studentas TempStud = new Studentas(TempName, TempSurn, rnd.Next(2, 11));
+                    TempStud.GeneratePazymiai(5);
+                    outfile.WriteLine("{0,-15}{1,-15}{2,16}", TempStud.Vardas, TempStud.Pavarde, Math.Round(TempStud.BendrasPazymys(), 2));
+                }
+                outfile.Flush(); outfile.Close();
+            } catch (Exception ex)
+            {
+                Console.WriteLine("Ivedimo klaida, iveskite sveika skaiciu");
+                GenerateStudents();
+            }
+        }
+
         private static void AddStudent(List<Studentas> Studentai)
         {
             Console.Write("Iveskite studento varda: "); string vard = Console.ReadLine();
@@ -77,12 +103,13 @@ namespace studentuprograma
         {
             do
             {
-                Console.WriteLine("Studentu programa:\n\n1 - Įvesti naują studentą\n2 - Isvesti studentus ant ekrano\n3 - Nuskaityti studentus is failo\nx - Baigti darba");
+                Console.WriteLine("Studentu programa:\n\n1 - Įvesti naują studentą\n2 - Isvesti studentus ant ekrano\n3 - Nuskaityti studentus is failo\n4 - Generuoti studentų failą\nx - Baigti darba");
                 string ConsoleInput = Console.ReadLine();
                 if (ConsoleInput == "x") break;
                 if (ConsoleInput == "1") AddStudent(Studentai);
                 if (ConsoleInput == "2") PrintStudents(Studentai);
                 if (ConsoleInput == "3") Studentai.AddRange(FileReader.ReadFile().OrderBy(x => x.Vardas).ThenBy(x => x.Pavarde).ToList());
+                if (ConsoleInput == "4") GenerateStudents();
             } while (true);
         }
     }
