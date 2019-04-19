@@ -8,10 +8,52 @@ namespace studentuprograma
     {
         private static int egz, sel, kiek;
 
+        private static void SplitStudentFile()
+        {
+            int path = 10;
+            Console.WriteLine("Kiek studentu yra faile?");
+            try
+            {
+                path = int.Parse(Console.ReadLine());
+            } catch (FormatException ex)
+            {
+                Console.WriteLine("Ivedimo klaida, iveskite sveika skaiciu");
+                SplitStudentFile();
+            }
+
+            List<Studentas> Studentai = new List<Studentas>();
+            List<Studentas> StudentaiNusk = new List<Studentas>();
+            List<Studentas> StudentaiGud = new List<Studentas>();
+
+            Studentai = FileReader.ReadFile("../../kursiokai" + path + ".txt");
+
+            foreach (Studentas stud in Studentai)
+            {
+                if (stud.Bendras < 5.0f)
+                {
+                    StudentaiNusk.Add(stud);
+                } else StudentaiGud.Add(stud);
+            }
+            Studentai = null;
+            StudentaiGud = StudentaiGud.OrderBy(x => x.Bendras).ToList();
+            StudentaiNusk = StudentaiNusk.OrderBy(x => x.Bendras).ToList();
+            System.IO.StreamWriter outfile = new System.IO.StreamWriter("../../gudruoliai" + path + ".txt", true);
+            System.IO.StreamWriter outfile1 = new System.IO.StreamWriter("../../nuskriaustukai" + path + ".txt", true);
+            outfile.WriteLine("{0,-15}{1,-15}{2,16}\n----------------------------------------------", "Vardas", "Pavarde", "Galutinis");
+            foreach (Studentas stud in StudentaiGud)
+            {
+                outfile.WriteLine("{0,-15}{1,-15}{2,16}", stud.Vardas, stud.Pavarde, stud.Bendras);
+            }
+            outfile1.WriteLine("{0,-15}{1,-15}{2,16}\n----------------------------------------------", "Vardas", "Pavarde", "Galutinis");
+            foreach (Studentas stud in StudentaiNusk)
+            {
+                outfile1.WriteLine("{0,-15}{1,-15}{2,16}", stud.Vardas, stud.Pavarde, stud.Bendras);
+            }
+            outfile.Flush(); outfile1.Flush(); outfile.Close(); outfile1.Close(); 
+        }
 
         private static void GenerateStudents()
         {
-            List<int> grades = new List<int>();
             Console.WriteLine("Kiek studentų sugeneruoti?");
             try
             {
@@ -23,9 +65,8 @@ namespace studentuprograma
                 for (int i = 1; i <= stud; i++)
                 {
                     TempName = "Vardas" + i; TempSurn = "Pavarde" + i;
-                    Studentas TempStud = new Studentas(TempName, TempSurn, rnd.Next(2, 11));
-                    TempStud.GeneratePazymiai(5);
-                    outfile.WriteLine("{0,-15}{1,-15}{2,16}", TempStud.Vardas, TempStud.Pavarde, Math.Round(TempStud.BendrasPazymys(), 2));
+                    Studentas TempStud = new Studentas(TempName, TempSurn, Math.Round(rnd.NextDouble() * (10.0f - 2.0f) + 2.0f));
+                    outfile.WriteLine("{0,-15}{1,-15}{2,16}", TempStud.Vardas, TempStud.Pavarde, TempStud.Bendras);
                 }
                 outfile.Flush(); outfile.Close();
             } catch (Exception ex)
@@ -103,13 +144,14 @@ namespace studentuprograma
         {
             do
             {
-                Console.WriteLine("Studentu programa:\n\n1 - Įvesti naują studentą\n2 - Isvesti studentus ant ekrano\n3 - Nuskaityti studentus is failo\n4 - Generuoti studentų failą\nx - Baigti darba");
+                Console.WriteLine("Studentu programa:\n\n1 - Įvesti naują studentą\n2 - Isvesti studentus ant ekrano\n3 - Nuskaityti studentus is failo\n4 - Generuoti studentų failą\n5 - Padalinti studentus is failo\nx - Baigti darba");
                 string ConsoleInput = Console.ReadLine();
                 if (ConsoleInput == "x") break;
                 if (ConsoleInput == "1") AddStudent(Studentai);
                 if (ConsoleInput == "2") PrintStudents(Studentai);
                 if (ConsoleInput == "3") Studentai.AddRange(FileReader.ReadFile().OrderBy(x => x.Vardas).ThenBy(x => x.Pavarde).ToList());
                 if (ConsoleInput == "4") GenerateStudents();
+                if (ConsoleInput == "5") SplitStudentFile();
             } while (true);
         }
     }
