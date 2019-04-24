@@ -52,6 +52,40 @@ namespace studentuprograma
             outfile.Flush(); outfile1.Flush(); outfile.Close(); outfile1.Close(); 
         }
 
+        public static void SplitStudentFile(int studnum)
+        {
+            List<Studentas> Studentai = new List<Studentas>();
+            List<Studentas> StudentaiNusk = new List<Studentas>();
+            List<Studentas> StudentaiGud = new List<Studentas>();
+
+            Studentai = FileReader.ReadFile("../../kursiokai" + studnum + ".txt");
+
+            foreach (Studentas stud in Studentai)
+            {
+                if (stud.Bendras < 5.0f)
+                {
+                    StudentaiNusk.Add(stud);
+                }
+                else StudentaiGud.Add(stud);
+            }
+            Studentai = null;
+            StudentaiGud = StudentaiGud.OrderBy(x => x.Bendras).ToList();
+            StudentaiNusk = StudentaiNusk.OrderBy(x => x.Bendras).ToList();
+            System.IO.StreamWriter outfile = new System.IO.StreamWriter("../../gudruoliai" + studnum + ".txt", true);
+            System.IO.StreamWriter outfile1 = new System.IO.StreamWriter("../../nuskriaustukai" + studnum + ".txt", true);
+            outfile.WriteLine("{0,-15}{1,-15}{2,16}\n----------------------------------------------", "Vardas", "Pavarde", "Galutinis");
+            foreach (Studentas stud in StudentaiGud)
+            {
+                outfile.WriteLine("{0,-15}{1,-15}{2,16}", stud.Vardas, stud.Pavarde, stud.Bendras);
+            }
+            outfile1.WriteLine("{0,-15}{1,-15}{2,16}\n----------------------------------------------", "Vardas", "Pavarde", "Galutinis");
+            foreach (Studentas stud in StudentaiNusk)
+            {
+                outfile1.WriteLine("{0,-15}{1,-15}{2,16}", stud.Vardas, stud.Pavarde, stud.Bendras);
+            }
+            outfile.Flush(); outfile1.Flush(); outfile.Close(); outfile1.Close();
+        }
+
         private static void GenerateStudents()
         {
             Console.WriteLine("Kiek studentų sugeneruoti?");
@@ -73,6 +107,29 @@ namespace studentuprograma
             {
                 Console.WriteLine("Ivedimo klaida, iveskite sveika skaiciu");
                 GenerateStudents();
+            }
+        }
+
+        public static void GenerateStudents(int studn)
+        {
+            try
+            {
+                Random rnd = new Random();
+                string TempName, TempSurn;
+                System.IO.StreamWriter outfile = new System.IO.StreamWriter("../../kursiokai" + studn + ".txt", true);
+                outfile.WriteLine("{0,-15}{1,-15}{2,16}\n----------------------------------------------", "Vardas", "Pavarde", "Galutinis");
+                for (int i = 1; i <= studn; i++)
+                {
+                    TempName = "Vardas" + i; TempSurn = "Pavarde" + i;
+                    Studentas TempStud = new Studentas(TempName, TempSurn, Math.Round(rnd.NextDouble() * (10.0f - 2.0f) + 2.0f));
+                    outfile.WriteLine("{0,-15}{1,-15}{2,16}", TempStud.Vardas, TempStud.Pavarde, TempStud.Bendras);
+                }
+                outfile.Flush(); outfile.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ivyko klaida, {0}", ex.Message);
+                GenerateStudents(studn);
             }
         }
 
@@ -144,14 +201,15 @@ namespace studentuprograma
         {
             do
             {
-                Console.WriteLine("Studentu programa:\n\n1 - Įvesti naują studentą\n2 - Isvesti studentus ant ekrano\n3 - Nuskaityti studentus is failo\n4 - Generuoti studentų failą\n5 - Padalinti studentus is failo\nx - Baigti darba");
+                Console.WriteLine("Studentu programa:\n\n1 - Įvesti naują studentą\n2 - Isvesti studentus ant ekrano\n3 - Nuskaityti studentus is failo\n4 - Generuoti studentų failą\n5 - Padalinti studentus is failo\n6 - Matuoti studentu generavimo ir padalinimo i failus laika\nx - Baigti darba");
                 string ConsoleInput = Console.ReadLine();
-                if (ConsoleInput == "x") break;
+                if (ConsoleInput == "x") Environment.Exit(0);
                 if (ConsoleInput == "1") AddStudent(Studentai);
                 if (ConsoleInput == "2") PrintStudents(Studentai);
                 if (ConsoleInput == "3") Studentai.AddRange(FileReader.ReadFile().OrderBy(x => x.Vardas).ThenBy(x => x.Pavarde).ToList());
                 if (ConsoleInput == "4") GenerateStudents();
                 if (ConsoleInput == "5") SplitStudentFile();
+                if (ConsoleInput == "6") SpeedMeasurement.MeasureGenSplitSpeed();
             } while (true);
         }
     }

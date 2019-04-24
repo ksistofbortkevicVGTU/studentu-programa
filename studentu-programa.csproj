@@ -37,6 +37,7 @@
     <Compile Include="Entity\Studentas.cs" />
     <Compile Include="UtilityClasses\MenuClass.cs" />
     <Compile Include="UtilityClasses\FileReader.cs" />
+    <Compile Include="UtilityClasses\SpeedMeasurement.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entity\" />
