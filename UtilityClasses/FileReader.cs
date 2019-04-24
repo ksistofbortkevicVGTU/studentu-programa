@@ -7,6 +7,7 @@ namespace studentuprograma
 {
     public static class FileReader
     {
+        //pagalbinis metodas studentai.txt failo nuskaitymui
         public static Studentas ToObjectFromLine(string Line)
         {
             string[] SeparatedWords = Line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
@@ -31,6 +32,7 @@ namespace studentuprograma
             return StudentObject;
         }
 
+        //pagalbinis metodas sugeneruoto failo nuskaitymui
         public static Studentas ToObjectFromLineGen(string Line)
         {
             string[] SeparatedWords = Line.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
@@ -52,6 +54,7 @@ namespace studentuprograma
             return StudentObject;
         }
 
+        //pagalbinis metodas studentai.txt failo nuskaitymui
         public static List<Studentas> ToObjectFromLines(string[] LinesFromFile)
         {
             List<Studentas> studentai = new List<Studentas>();
@@ -63,6 +66,7 @@ namespace studentuprograma
             return studentai;
         }
 
+        //pagalbinis metodas sugeneruoto failo nuskaitymui
         public static List<Studentas> ToObjectFromLinesGen(string[] LinesFromFile)
         {
             List<Studentas> studentai = new List<Studentas>();
@@ -74,6 +78,7 @@ namespace studentuprograma
             return studentai;
         }
 
+        //failo studentai.txt nuskaitymas
         public static List<Studentas> ReadFile()
         {
             List<Studentas> studentai = new List<Studentas>();
@@ -85,13 +90,14 @@ namespace studentuprograma
                 studentai.AddRange(ToObjectFromLines(lines));
             } catch (System.IO.FileNotFoundException ex)
             {
-                Console.WriteLine("Failas nerastas. Sukurkite arba teisingai pavadinkite faila i \"kursiokai.txt\"\n Paspauskite bet kuri mygtuka, kad uzdaryti programa");
+                Console.WriteLine("Failas nerastas. Sukurkite arba teisingai pervadinkite faila i \"Studentai.txt\"\n Paspauskite bet kuri mygtuka, kad uzdaryti programa");
                 Console.ReadKey();
                 Environment.Exit(0);
             }
             return studentai;
         }
 
+        //sugeneruotu failu nuskaitymas
         public static List<Studentas> ReadFile(string path)
         {
             List<Studentas> studentai = new List<Studentas>();

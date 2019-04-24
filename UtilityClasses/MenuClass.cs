@@ -6,8 +6,10 @@ namespace studentuprograma
 {
     public class Menu
     {
+        //deklaruojami kintamieji kurie bus naudojami pasirinkimams metoduose
         private static int egz, sel, kiek;
 
+        //privatus metodas padalinti sugeneruota studentu faila
         private static void SplitStudentFile()
         {
             int path = 10;
@@ -52,6 +54,7 @@ namespace studentuprograma
             outfile.Flush(); outfile1.Flush(); outfile.Close(); outfile1.Close(); 
         }
 
+        //viesas metodas naudojamas greicio skaiciavime
         public static void SplitStudentFile(int studnum)
         {
             List<Studentas> Studentai = new List<Studentas>();
@@ -86,6 +89,7 @@ namespace studentuprograma
             outfile.Flush(); outfile1.Flush(); outfile.Close(); outfile1.Close();
         }
 
+        //privatus metodas sugeneruoti studento faila
         private static void GenerateStudents()
         {
             Console.WriteLine("Kiek studentų sugeneruoti?");
@@ -110,6 +114,7 @@ namespace studentuprograma
             }
         }
 
+        //viesas metodas naudojamas greicio skaiciavime
         public static void GenerateStudents(int studn)
         {
             try
@@ -133,6 +138,7 @@ namespace studentuprograma
             }
         }
 
+        //prideti studenta prie konteinerio atmintyje
         private static void AddStudent(List<Studentas> Studentai)
         {
             Console.Write("Iveskite studento varda: "); string vard = Console.ReadLine();
@@ -177,6 +183,7 @@ namespace studentuprograma
             Studentai.Add(stud);
         }
 
+        //atspausdinti ant ekrano studentu sarasa is atmintyje esancio konteinerio
         private static void PrintStudents(List<Studentas> Studentai)
         {
             Console.WriteLine("Vesti bendra pazymi is 1 - vidurkio ar 2 - medianos?"); 
@@ -202,6 +209,7 @@ namespace studentuprograma
             }
         }
 
+        //pagrindinio meniu vaizdavimo ir veikimo metodas
         public static void MainMenu(List<Studentas> Studentai)
         {
             do

@@ -12,6 +12,8 @@ namespace studentuprograma
                 Console.Write("Su kokiu studentu skaiciumi tikrinti laika? ");
                 int studnum = int.Parse(Console.ReadLine());
                 Console.WriteLine("Pradėtas generuoti failas su {0} studentu skaičiumi", studnum);
+
+                //sukuriamas objektas laiko matavimui
                 Stopwatch time = new Stopwatch();
 
                 time.Start();

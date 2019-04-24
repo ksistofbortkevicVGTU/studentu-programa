@@ -5,7 +5,7 @@ namespace studentuprograma
 {
     public class Studentas
     {
-        //Declare variables
+        //----------------------KINTAMIEJI---------------------
         public string Vardas;
         public string Pavarde;
         public double Vidurkis;
@@ -15,7 +15,7 @@ namespace studentuprograma
 
         private string ConsoleInput;
 
-        //Declare constructors
+        //-------------------------KONSTRUKTORIAI-------------------------
         public Studentas(string vard, string pav){
             this.Vardas = vard; this.Pavarde = pav;}
 
@@ -30,9 +30,12 @@ namespace studentuprograma
         public Studentas(string vard, string pav, int egz, List<int> grades){
             this.Vardas = vard; this.Pavarde = pav; this.EgzPazymys = egz; this.NdPazymiai = grades;}
 
+        //--------------------------METODAI-----------------------------
 
-        //Public methods:
 
+        //viesi metodai:
+
+        //ivesti pazymius ranka
         public void AddPazymiai()
         {
             Console.WriteLine("Irasykite po viena namu darbu pazymi, kai baigsite, iveskite \"x\"");
@@ -49,12 +52,14 @@ namespace studentuprograma
             } while (true);
         }
 
+        //sugeneruoti pazymius
         public void GeneratePazymiai(int n)
         {
             Random rnd = new Random();
             for(int i = 0; i < n; i++) NdPazymiai.Add(rnd.Next(2, 11));
         }
 
+        //pasirinkimas, ar skaiciuoti pagal vidurki ar mediana
         public void GautiVidurki(int type)
         {
             if (type == 1) Vidurkis = CountVidurkis();
@@ -63,7 +68,11 @@ namespace studentuprograma
 
         public double BendrasPazymys(){ return (0.7f * EgzPazymys) + (0.3f * Vidurkis); }
 
-        //Private methods:
+
+
+        //Privatus metodai, reikalingi apskaiciavimui:
+
+        //bendro pazymio skaiciavimas vietoj vidurkio naudojant mediana
         private void CountMedian()
         {
             int[] TempArr = NdPazymiai.ToArray();
@@ -74,7 +83,7 @@ namespace studentuprograma
             }
             else Vidurkis = TempArr[(TempArr.Length / 2 - 1)];
         }
-
+        //pazymiu vidurkio paskaiciavimas
         private double CountVidurkis()
         {
             double vid = 0; int i = 0;
