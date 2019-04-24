@@ -21,9 +21,9 @@ namespace studentuprograma
                 SplitStudentFile();
             }
 
-            List<Studentas> Studentai = new List<Studentas>();
-            List<Studentas> StudentaiNusk = new List<Studentas>();
-            List<Studentas> StudentaiGud = new List<Studentas>();
+            LinkedList<Studentas> Studentai = new LinkedList<Studentas>();
+            LinkedList<Studentas> StudentaiNusk = new LinkedList<Studentas>();
+            LinkedList<Studentas> StudentaiGud = new LinkedList<Studentas>();
 
             Studentai = FileReader.ReadFile("../../kursiokai" + path + ".txt");
 
@@ -31,12 +31,12 @@ namespace studentuprograma
             {
                 if (stud.Bendras < 5.0f)
                 {
-                    StudentaiNusk.Add(stud);
-                } else StudentaiGud.Add(stud);
+                    StudentaiNusk.AddLast(stud);
+                } else StudentaiGud.AddLast(stud);
             }
             Studentai = null;
-            StudentaiGud = StudentaiGud.OrderBy(x => x.Bendras).ToList();
-            StudentaiNusk = StudentaiNusk.OrderBy(x => x.Bendras).ToList();
+            StudentaiGud = LinkedListUtil.Sort(StudentaiGud);
+            StudentaiNusk = LinkedListUtil.Sort(StudentaiNusk);
             System.IO.StreamWriter outfile = new System.IO.StreamWriter("../../gudruoliai" + path + ".txt", true);
             System.IO.StreamWriter outfile1 = new System.IO.StreamWriter("../../nuskriaustukai" + path + ".txt", true);
             outfile.WriteLine("{0,-15}{1,-15}{2,16}\n----------------------------------------------", "Vardas", "Pavarde", "Galutinis");
@@ -54,9 +54,9 @@ namespace studentuprograma
 
         public static void SplitStudentFile(int studnum)
         {
-            List<Studentas> Studentai = new List<Studentas>();
-            List<Studentas> StudentaiNusk = new List<Studentas>();
-            List<Studentas> StudentaiGud = new List<Studentas>();
+            LinkedList<Studentas> Studentai = new LinkedList<Studentas>();
+            LinkedList<Studentas> StudentaiNusk = new LinkedList<Studentas>();
+            LinkedList<Studentas> StudentaiGud = new LinkedList<Studentas>();
 
             Studentai = FileReader.ReadFile("../../kursiokai" + studnum + ".txt");
 
@@ -64,13 +64,13 @@ namespace studentuprograma
             {
                 if (stud.Bendras < 5.0f)
                 {
-                    StudentaiNusk.Add(stud);
+                    StudentaiNusk.AddLast(stud);
                 }
-                else StudentaiGud.Add(stud);
+                else StudentaiGud.AddLast(stud);
             }
             Studentai = null;
-            StudentaiGud = StudentaiGud.OrderBy(x => x.Bendras).ToList();
-            StudentaiNusk = StudentaiNusk.OrderBy(x => x.Bendras).ToList();
+            StudentaiGud = LinkedListUtil.Sort(StudentaiGud);
+            StudentaiNusk = LinkedListUtil.Sort(StudentaiNusk);
             System.IO.StreamWriter outfile = new System.IO.StreamWriter("../../gudruoliai" + studnum + ".txt", true);
             System.IO.StreamWriter outfile1 = new System.IO.StreamWriter("../../nuskriaustukai" + studnum + ".txt", true);
             outfile.WriteLine("{0,-15}{1,-15}{2,16}\n----------------------------------------------", "Vardas", "Pavarde", "Galutinis");
@@ -133,7 +133,7 @@ namespace studentuprograma
             }
         }
 
-        private static void AddStudent(List<Studentas> Studentai)
+        private static void AddStudent(LinkedList<Studentas> Studentai)
         {
             Console.Write("Iveskite studento varda: "); string vard = Console.ReadLine();
             Console.Write("Iveskite studento pavarde: "); string pav = Console.ReadLine();
@@ -169,10 +169,10 @@ namespace studentuprograma
                 stud.GeneratePazymiai(kiek);
             }
             else stud.AddPazymiai();
-            Studentai.Add(stud);
+            Studentai.AddLast(stud);
         }
 
-        private static void PrintStudents(List<Studentas> Studentai)
+        private static void PrintStudents(LinkedList<Studentas> Studentai)
         {
             Console.WriteLine("Vesti bendra pazymi is 1 - vidurkio ar 2 - medianos?"); 
             try 
@@ -197,7 +197,7 @@ namespace studentuprograma
             }
         }
 
-        public static void MainMenu(List<Studentas> Studentai)
+        public static void MainMenu(LinkedList<Studentas> Studentai)
         {
             do
             {
@@ -206,7 +206,7 @@ namespace studentuprograma
                 if (ConsoleInput == "x") Environment.Exit(0);
                 if (ConsoleInput == "1") AddStudent(Studentai);
                 if (ConsoleInput == "2") PrintStudents(Studentai);
-                if (ConsoleInput == "3") Studentai.AddRange(FileReader.ReadFile().OrderBy(x => x.Vardas).ThenBy(x => x.Pavarde).ToList());
+                if (ConsoleInput == "3") LinkedListUtil.AddListToLinkedList(FileReader.ReadFile().OrderBy(x => x.Vardas).ThenBy(x => x.Pavarde).ToList(), Studentai);
                 if (ConsoleInput == "4") GenerateStudents();
                 if (ConsoleInput == "5") SplitStudentFile();
                 if (ConsoleInput == "6") SpeedMeasurement.MeasureGenSplitSpeed();

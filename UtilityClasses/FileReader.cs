@@ -52,37 +52,37 @@ namespace studentuprograma
             return StudentObject;
         }
 
-        public static List<Studentas> ToObjectFromLines(string[] LinesFromFile)
+        public static LinkedList<Studentas> ToObjectFromLines(string[] LinesFromFile)
         {
-            List<Studentas> studentai = new List<Studentas>();
+            LinkedList<Studentas> studentai = new LinkedList<Studentas>();
 
             foreach (string stud in LinesFromFile)
             {
-                studentai.Add(ToObjectFromLine(stud));
+                studentai.AddLast(ToObjectFromLine(stud));
             }
             return studentai;
         }
 
-        public static List<Studentas> ToObjectFromLinesGen(string[] LinesFromFile)
+        public static LinkedList<Studentas> ToObjectFromLinesGen(string[] LinesFromFile)
         {
-            List<Studentas> studentai = new List<Studentas>();
+            LinkedList<Studentas> studentai = new LinkedList<Studentas>();
 
             foreach (string stud in LinesFromFile)
             {
-                studentai.Add(ToObjectFromLineGen(stud));
+                studentai.AddLast(ToObjectFromLineGen(stud));
             }
             return studentai;
         }
 
-        public static List<Studentas> ReadFile()
+        public static LinkedList<Studentas> ReadFile()
         {
-            List<Studentas> studentai = new List<Studentas>();
+            LinkedList<Studentas> studentai = new LinkedList<Studentas>();
             try
             {
                 string[] lines = File.ReadAllLines("../../Studentai.txt");
                 lines = lines.Skip(1).ToArray();
 
-                studentai.AddRange(ToObjectFromLines(lines));
+                LinkedListUtil.AddListToLinkedList(ToObjectFromLines(lines).ToList(), studentai);
             } catch (System.IO.FileNotFoundException ex)
             {
                 Console.WriteLine("Failas nerastas. Sukurkite arba teisingai pavadinkite faila i \"kursiokai.txt\"\n Paspauskite bet kuri mygtuka, kad uzdaryti programa");
@@ -92,15 +92,15 @@ namespace studentuprograma
             return studentai;
         }
 
-        public static List<Studentas> ReadFile(string path)
+        public static LinkedList<Studentas> ReadFile(string path)
         {
-            List<Studentas> studentai = new List<Studentas>();
+            LinkedList<Studentas> studentai = new LinkedList<Studentas>();
             try
             {
                 string[] lines = File.ReadAllLines(path);
                 lines = lines.Skip(2).ToArray();
 
-                studentai.AddRange(ToObjectFromLinesGen(lines));
+                LinkedListUtil.AddListToLinkedList(ToObjectFromLinesGen(lines).ToList(), studentai);
             }
             catch (System.IO.FileNotFoundException ex)
             {

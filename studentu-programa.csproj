@@ -38,6 +38,7 @@
     <Compile Include="UtilityClasses\MenuClass.cs" />
     <Compile Include="UtilityClasses\FileReader.cs" />
     <Compile Include="UtilityClasses\SpeedMeasurement.cs" />
+    <Compile Include="UtilityClasses\LinkedListUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entity\" />

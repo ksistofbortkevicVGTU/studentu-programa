@@ -5,7 +5,7 @@ namespace studentuprograma
 {
     class Program
     {
-        private static List<Studentas> Studentai = new List<Studentas>();
+        private static LinkedList<Studentas> Studentai = new LinkedList<Studentas>();
 
         public static void Main(string[] args)
         {
