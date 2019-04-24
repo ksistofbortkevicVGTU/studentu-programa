@@ -137,6 +137,11 @@ namespace studentuprograma
         {
             Console.Write("Iveskite studento varda: "); string vard = Console.ReadLine();
             Console.Write("Iveskite studento pavarde: "); string pav = Console.ReadLine();
+            if (!(vard.All(char.IsLetter)) || !(pav.All(char.IsLetter)))
+            {
+                Console.WriteLine("Vardas ir pavarde privalo susideti tik is raidziu");
+                AddStudent(Studentai);
+            }
             Console.Write("Iveskite studento egzamino pazymi: ");
             try 
             { 
