@@ -17,7 +17,7 @@ namespace studentuprograma
             {
                 if (SeparatedWords.Length >= 4)
                 {
-                    for (int i = 2; i <= SeparatedWords.Length; i++)
+                    for (int i = 2; i < SeparatedWords.Length - 1; i++)
                     {
                         grades.Add(int.Parse(SeparatedWords[i]));
                     }

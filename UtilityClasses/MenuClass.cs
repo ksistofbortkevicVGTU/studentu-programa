@@ -214,7 +214,7 @@ namespace studentuprograma
         {
             do
             {
-                Console.WriteLine("Studentu programa:\n\n1 - Įvesti naują studentą\n2 - Isvesti studentus ant ekrano\n3 - Nuskaityti studentus is failo\n4 - Generuoti studentų failą\n5 - Padalinti studentus is failo\n6 - Matuoti studentu generavimo ir padalinimo i failus laika\nx - Baigti darba");
+                Console.WriteLine("Studentu programa:\n\n1 - Ivesti nauja studenta\n2 - Isvesti studentus ant ekrano\n3 - Nuskaityti studentus is failo\n4 - Generuoti studentų failą\n5 - Padalinti studentus is failo\n6 - Matuoti studentu generavimo ir padalinimo i failus laika\nx - Baigti darba");
                 string ConsoleInput = Console.ReadLine();
                 if (ConsoleInput == "x") Environment.Exit(0);
                 if (ConsoleInput == "1") AddStudent(Studentai);
