@@ -10,7 +10,7 @@
 Vardas  Pavardė [ND pažymiai] Egzaminas
 [sName] [sSurn] [ND grades]   [eGrade]
 ...     ...     ...           ...
-
+```
   Taip pat pridėta galimybė sugeneruoti studento pažymius.
 
 ## 0.3 versija
@@ -25,14 +25,14 @@ Vardas  Pavardė [ND pažymiai] Egzaminas
 ### 1 - Įvesti naują studentą
   Įvedamas naujas studentas į atmintį. Prašoma įvesti vardą, pavardę ir egzamino pažymys (sveikas skaičius). Tada programa paklaus, ar sugeneruoti pažymius, ar naudotojas ves juos ranka, jei įvesite 1, bus sugeneruoti pažymiai, jei įvesite kitą skaičių, pažymius reikės vesti pačiam. Įvedus/sugeneravus pažymius naudotojas grąžinamas į pagrindinį meniu.
 ### 2 - Isvesti studentus ant ekrano
-  
 ### 3 - Nuskaityti studentus is failo
 ### 4 - Generuoti studentų failą
 ### 5 - Padalinti studentus is failo
 ### 6 - Matuoti studentu generavimo ir padalinimo i failus laika
 
 ## Greičio testavimo rezultatai
-### List<T> konteineris:
+### List<T>
+
 ```
 Failas su 10 studentais sugeneruotas ir paskirstytas i skirtingus failus (gudruoliai10 ir nuskriaustukai10) per 0.43 sekundziu
 Failas su 100 studentais sugeneruotas ir paskirstytas i skirtingus failus (gudruoliai100 ir nuskriaustukai100) per 0.7 sekundziu
@@ -41,6 +41,7 @@ Failas su 10000 studentais sugeneruotas ir paskirstytas i skirtingus failus (gud
 Failas su 100000 studentais sugeneruotas ir paskirstytas i skirtingus failus (gudruoliai100000 ir nuskriaustukai100000) per 2.633 sekundziu
 ```
 ### LinkedList<T>
+  
 ```
 Failas su 10 studentais sugeneruotas ir paskirstytas i skirtingus failus (gudruoliai10 ir nuskriaustukai10) per 0.39 sekundziu
 Failas su 100 studentais sugeneruotas ir paskirstytas i skirtingus failus (gudruoliai100 ir nuskriaustukai100) per 0.10 sekundziu
