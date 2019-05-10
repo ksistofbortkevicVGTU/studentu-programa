@@ -63,8 +63,9 @@ namespace studentuprograma
 
             Studentai = FileReader.ReadFile("../../kursiokai" + studnum + ".txt");
 
-            foreach (Studentas stud in Studentai)
+            for(int i = Studentai.Count - 1; i >= 0; i--)
             {
+                Studentas stud = Studentai[i];
                 if (stud.Bendras < 5.0f)
                 {
                     StudentaiNusk.Add(stud);
